@@ -40,4 +40,10 @@ decryptMessage (2nd subroutine):
   mov     @R4+, R7    ; now R7 = R4
   call    #decryptByte
   mov     @R6+, R7
+  
+continue through the loop until R8 is 0
+at this point, the message is fully decrypted
+
+wait:
+  jmp     wait
 ```

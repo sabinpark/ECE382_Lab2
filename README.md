@@ -13,8 +13,10 @@ The prelab requires pseudo code and a flowchart for the two primary subroutines.
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/Lab2_flowchart.jpg "Lab 2 Flowchart")
 
 #### Pseudocode
+
+*NOTE:* the following is pseudocode and is not meant to compile
+
 ```
-; Given:
 ;  ROM A = message (encrypted)
 ;  ROM B = key
 ;  RAM = message (decrypted)

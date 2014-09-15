@@ -11,3 +11,31 @@ The prelab requires pseudo code and a flowchart for the two primary subroutines.
 
 #### Flowchart
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/Lab2_flowchart.jpg "Lab 2 Flowchart")
+
+#### Pseudocode
+```
+; Given:
+;  ROM A = message (encrypted)
+;  ROM B = key
+;  RAM = message (decrypted)
+
+main:
+  R4 points to ROM A
+  R5 points to ROM B
+  R6 points to RAM (starting at 0x0200)
+  R7 is a temporary holder before storing the value in RAM
+  R8 is set to message length
+  
+decryptByte (1st subroutine):
+  ; provided that Z = encrypted, A = decrypted, K = key
+  push    Z, K
+  xor   Z, K
+  mov   Z, A
+  pop   A
+  Ret
+  
+decryptMessage (2nd subroutine):
+  mov   @R4+, R7    ; now R7 = R4
+  call    #decryptByte
+  mov   @R6+, R7
+```

@@ -240,5 +240,6 @@ My initial guess that the last char would be *#* turned out to be very wrong. Fo
 ## Documentation
 * C2C Taylor Bodin gave me the idea to check for spaces, rather than checking for particular letters (A Functionality). 
 * I used http://www.asciitohex.com/ to convert from ASCII to hex (and vice versa). 
-* I also used http://www.miniwebtool.com/bitwise-calculator/ to quickly calculate the XOR of two hexadecimal numbers. 
+* I used http://www.miniwebtool.com/bitwise-calculator/ to quickly calculate the XOR of two hexadecimal numbers. 
+* I used http://en.wikipedia.org/wiki/Frequency_analysis to learn about frequency analysis.
 * No other help received.

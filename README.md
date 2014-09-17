@@ -98,14 +98,14 @@ forever:
 Translating my pseudo code into actual code was not very difficult. The only things I had to add in extra were the register for the message length and a jump call to continue to run through the message if it had not yet been fully decrypted.
 ```
 decryptMessage:
-	tst		R8
-	jz		forever
+	tst	R8
+	jz	forever
 	mov.b		@R4+, R7	; put value at R4 into R7, increment R4
 	call		#decryptCharacter
 	mov.b		R7, 0(R6)	; put decrypted value into the address R6 points to
 	inc.w		R6
 	dec.b		R8
-	jmp		decryptMessage
+	jmp	decryptMessage
     	ret
 ```
 ##### decryptByte

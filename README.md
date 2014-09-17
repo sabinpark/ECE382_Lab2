@@ -139,16 +139,16 @@ resetKeyIndex:
 Aside from those changes, I added in a *jz* call that would reset the key index if the index incremented to the address value of the terminating address. And thus, I also added in a label that would be used to return to the message decryption if/when I needed to reset the key index. 
 ```
 decryptMessage:
-	tst		R8
-	jz		forever
+	tst			R8
+	jz			forever
 	cmp.w		#terminate_address, R5
-	jz		resetKeyIndex
+	jz			resetKeyIndex
 continueDecrypt:
 	mov.b		@R4+, R7	; put value at R4 into R7, increment R4
 	call		#decryptCharacter
 	mov.b		R7, 0(R6)	; put decrypted value into the address R6 points to
 	inc.w		R6
 	dec.b		R8
-	jmp		decryptMessage
+	jmp			decryptMessage
 	ret
 ```

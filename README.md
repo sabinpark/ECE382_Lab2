@@ -72,7 +72,14 @@ key_address:
 	.byte	0xac
 ```
 
-As expected, the cipher text was stored in ROM starting at the address 0xC000. To my pleasant surprise, the next input into ROM (when I add in the key) was set immediately after the last byte of the cipher text. **[ADD USEFULNESS FOR COUNT]**
+As expected, the cipher text was stored in ROM starting at the address 0xC000. To my pleasant surprise, the next input into ROM (when I add in the key) was set immediately after the last byte of the cipher text. I used this finding to calculate the length of the message. I made a subroutine called *getMessageLength*, which subtracted the address of the beginning of the message from the address of the beginning of the key.
+```
+getMessageLength:
+	mov.w	#key_address, R8
+	mov.w	#encrypt_address, R9
+	sub.w	R9, R8		; R8 = R8-R9,  thus R8 is the length of the message
+	ret
+```
 
 As for the rest of the code, I simply initialized the pointers and then called the appropriate subroutines. The moving of pointers was pretty self-explanatory as well.
 

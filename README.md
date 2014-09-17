@@ -7,7 +7,7 @@ ECE382_Lab2
 |-------|-------|-------|
 | Required Functionality | Complete | 16 September 14 |
 | B Functionality | Complete | 16 September 14 |
-| A Functionality | - | - |
+| A Functionality | Complete | 17 September 14 |
 
 ## Prelab
 

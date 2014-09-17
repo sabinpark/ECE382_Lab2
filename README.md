@@ -174,6 +174,7 @@ Luckily, this message proved to contain hints for obtaining A functionality.
 At first, I was completely clueless on how to solve this problem. In fact, I had intitally assumed that I was supposed to create a program that would take in an arbitrary encrypted message and somehow brute-force the program to try indefinite amounts of key combinations to somehow magically decrypt the message. After I reread the prompt, I realized that all I needed to do was find one specific key for this particular message. Again, not rocket science (but I suppose it's close enough). I compiled a list of what I knew and what I could potentially do to solve this problem:
 * the key is 16 bits (or 2 bytes) (given by the previously decrypted message)
 * frequency analysis is useful
+* based on the previous two messages, the last character of the message has a high chance of being *#*
 
 I did a google search on frequency analysis and found an example of the infamous Eve deciphering a hidden message using frequency analysis. She basically counted the most frequent cipher and used educated guesses to XOR with the envrypted message. Using the guess and check method, she was eventually able to decipher the message.
 
@@ -181,10 +182,38 @@ And so, I proceeded to first split the given cipher into two parts: even and odd
 
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/freq_analysis.PNG "frequency analysis results")
 
-From past experience, I knew that the letter *e* was the most common letter used in the English language. Thus, I found the hex equivalent of the ASCII of *e* to be: *65*
-
 ##### Guess 1:
+With the assumption that the last character of the message will be equal to *#*, I found the hex equivalent of *#* to be 23. I performed an XOR between 23 and the last byte of the message and obtained a potential *odd* key value of b3. I then performed an XOR between b3 and all of the odd bytes of the message. Unfortunately, I got nonsense results that did not seem remotely close to any message:
+![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/guess_1.PNG "guess 1")
 
+##### Guess 2:
+I decided to check spaces next. I found the hex value for the *space* char to be *20*. Using the frequency analysis table, I XOR'ed the space key with the most commonly occurring byte from each column (both even and odd). My guesses consisted of:
+* Even key: 16 xor 20 = 36
+* Odd key: 90 xor 20 = b0
+I ran the two keys in the program and got:
+![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/guess_2.PNG "guess 2")
+
+Nope!
+
+##### Guess 3:
+Next on the table were 53 (even column) and ca (odd column)
+* Even key: 53 xor 20 = 73
+* Odd key: ca xor 20 = ea
+I ran the two keys in the program and got:
+![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/guess_3.PNG "guess 3")
+
+Not quite, but getting better.
+
+##### Guess 4:
+From Guess 3, I found that the odd bytes were strange because they had numbers and symbols instead of letters. Thus, I kept my guess for the even bytes and changed my odd bytes guess to the next in the column.
+* Even key: 53 xor 20 = 73
+* Odd key: 9e xor 20 = be
+I ran the two keys in the program and got:
+![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/guess_4.PNG "guess 4")
+
+SUCCESS!
+
+It turns out that my fourth guess worked!
 
 ### Debugging
 #### Required Functionality

@@ -117,8 +117,38 @@ decryptCharacter:
 ```
 
 ##### Result
+I changed the memory browser view to *character* in order to see the following message:
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/R_funct_message.PNG "R functionality result")
+As expected, the message was properly decrypted starting at the RAM memory address of 0x0200.
 
 ### B Functionality
-
-
+Adding the B functionality was not too difficult. I accomplished this next task by adding two registers:
+* R10 = register to store and hold an arbitrary terminate address
+* R11 = register to store and hold the permanent value of the key_address
+In the initializations for the ROM pointers, I added a line of code that stored my arbitrary value (0x00) that added a byte in ROM. This addition into the ROM was placed immediately following the end of the key. Using this detail, I was utlimately able to calculate the length of the key and determine when to reset the key pointer index.
+```
+terminate_address:
+	.byte	0x00		; arbitrarily chosen value
+```
+As you may notice, I used R11 to reset the key index.
+```
+resetKeyIndex:
+	mov.w	R11, R5
+	jmp		continueDecrypt
+```
+Aside from those changes, I added in a *jz* call that would reset the key index if the index incremented to the address value of the terminating address. And thus, I also added in a label that would be used to return to the message decryption if/when I needed to reset the key index. 
+```
+decryptMessage:
+	tst		R8
+	jz		forever
+	cmp.w		#terminate_address, R5
+	jz		resetKeyIndex
+continueDecrypt:
+	mov.b		@R4+, R7	; put value at R4 into R7, increment R4
+	call		#decryptCharacter
+	mov.b		R7, 0(R6)	; put decrypted value into the address R6 points to
+	inc.w		R6
+	dec.b		R8
+	jmp		decryptMessage
+	ret
+```

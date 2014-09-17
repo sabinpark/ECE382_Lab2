@@ -228,4 +228,7 @@ I first attempted to create another subroutine that would calculate the length o
 My initial guess that the last char would be *#* turned out to be very wrong. Fortunately, I was able to disprove my assumption almost immediately. Once I started to get on a roll using the guess-check method, I found it easy to debug by simply taking out nonsensical message outputs. I would then move onto the next guess from the table.
 
 ## Documentation
-C2C Taylor Bodin gave me the idea to check for spaces, rather than checking for particular letters (A Functionality). I used http://www.asciitohex.com/ to convert from ASCII to hex (and vice versa). I also used http://www.miniwebtool.com/bitwise-calculator/ to quickly calculate the XOR of two hexadecimal numbers. No other help received.
+* C2C Taylor Bodin gave me the idea to check for spaces, rather than checking for particular letters (A Functionality). 
+* I used http://www.asciitohex.com/ to convert from ASCII to hex (and vice versa). 
+* I also used http://www.miniwebtool.com/bitwise-calculator/ to quickly calculate the XOR of two hexadecimal numbers. 
+* No other help received.

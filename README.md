@@ -170,6 +170,17 @@ As expected, I obtained another easily-comprehendable message:
 Luckily, this message proved to contain hints for obtaining A functionality.
 
 ### A Functionality
+#### Brainstorming
+At first, I was completely clueless on how to solve this problem. In fact, I had intitally assumed that I was supposed to create a program that would take in an arbitrary encrypted message and somehow brute-force the program to try indefinite amounts of key combinations to somehow magically decrypt the message. After I reread the prompt, I realized that all I needed to do was find one specific key for this particular message. Again, not rocket science (but I suppose it's close enough). I compiled a list of what I knew and what I could potentially do to solve this problem:
+* the key is 16 bits (or 2 bytes) (given by the previously decrypted message)
+* frequency analysis is useful
+
+I did a google search on frequency analysis and found an example of the infamous Eve deciphering a hidden message using frequency analysis. She basically counted the most frequent cipher and used educated guesses to XOR with the envrypted message. Using the guess and check method, she was eventually able to decipher the message.
+
+And so, I proceeded to first split the given cipher into two parts: even and odd. *NOTE:* I did this because we were given the fact that the key consisted of two bytes. I then counted the frequency of each byte and took note on a table:
+
+
+
 
 ### Debugging
 #### Required Functionality

@@ -229,7 +229,7 @@ SUCCESS!
 
 It turns out that my fourth guess worked!
 ***
-### Debugging
+## Debugging
 #### Required Functionality
 I had some trouble initially due to the differences in bytes and words. I admit, I got lazy and simply set everything to .byte because I knew I was going to be reading through the message byte by byte. However, after I was confident that the logic of the code was correct, I went back and made sure that the code had .byte where it needed, and .word in its own appropriate places. Not rocket science.
 #### B Functionality

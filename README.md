@@ -12,14 +12,13 @@ ECE382_Lab2
 ## Prelab
 
 #### Requirements
-
 The prelab requires pseudo code and a flowchart for the two primary subroutines. The subroutines are described below:
 * "The job of the first is to decrypt an individual piece of information. It should use the pass-by-value technique and take in the encrypted value and the key and pass out the decrypted value." (ECE 382 Lab 2)
 * "The job of the second is to leverage the first subroutine to decrypt the entire message. It should use the pass-by-reference technique to take in the address of the beginning of the message, the address of the key, and the address in RAM where the decrypted message will be placed. It should use the pass-by-value technique to take in the length of the message. It will pass the encrypted message byte-by-byte to the first subroutine, then store the decrypted results in RAM." (ECE 382 Lab 2)
-
+***
 #### Flowchart
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/Lab2_flowchart.jpg "Lab 2 Flowchart")
-
+***
 #### Pseudocode
 
 *NOTE:* the following is pseudocode and is not meant to compile
@@ -121,7 +120,7 @@ I changed the memory browser view to *character* in order to see the following m
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/R_funct_message.PNG "R functionality result")
 
 As expected, the message was properly decrypted starting at the RAM memory address of 0x0200.
-
+***
 ### B Functionality
 Adding the B functionality was not too difficult. I accomplished this next task by adding two registers:
 * R10 = register to store and hold an arbitrary terminate address
@@ -168,7 +167,7 @@ As expected, I obtained another easily-comprehendable message:
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/B_funct_message.PNG "B functionality result")
 
 Luckily, this message proved to contain hints for obtaining A functionality.
-
+***
 ### A Functionality
 #### Brainstorming
 At first, I was completely clueless on how to solve this problem. In fact, I had intitally assumed that I was supposed to create a program that would take in an arbitrary encrypted message and somehow brute-force the program to try indefinite amounts of key combinations to somehow magically decrypt the message. After I reread the prompt, I realized that all I needed to do was find one specific key for this particular message. Again, not rocket science (but I suppose it's close enough). I compiled a list of what I knew and what I could potentially do to solve this problem:

@@ -106,7 +106,7 @@ decryptMessage:
 	inc.w		R6
 	dec.b		R8
 	jmp			decryptMessage
-    	ret
+	ret
 ```
 ##### decryptByte
 This second subroutine was ridiculously simple:

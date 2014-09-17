@@ -115,3 +115,5 @@ decryptCharacter:
 	xor.b		@R5, R7
 	ret
 ```
+
+### B Functionality

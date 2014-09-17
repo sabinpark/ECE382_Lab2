@@ -178,7 +178,7 @@ At first, I was completely clueless on how to solve this problem. In fact, I had
 I did a google search on frequency analysis and found an example of the infamous Eve deciphering a hidden message using frequency analysis. She basically counted the most frequent cipher and used educated guesses to XOR with the envrypted message. Using the guess and check method, she was eventually able to decipher the message.
 
 And so, I proceeded to first split the given cipher into two parts: even and odd. *NOTE:* I did this because we were given the fact that the key consisted of two bytes. I then counted the frequency of each byte and took note on a table:
-
+![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/freq_analysis.PNG "frequency analysis results")
 
 
 

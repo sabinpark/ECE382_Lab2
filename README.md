@@ -125,7 +125,7 @@ As expected, the message was properly decrypted starting at the RAM memory addre
 Adding the B functionality was not too difficult. I accomplished this next task by adding two registers:
 * R10 = register to store and hold an arbitrary terminate address
 * R11 = register to store and hold the permanent value of the key_address
-In the initializations for the ROM pointers, I added a line of code that stored my arbitrary value (0x00) that added a byte in ROM. This addition into the ROM was placed immediately following the end of the key. Using this detail, I was utlimately able to calculate the length of the key and determine when to reset the key pointer index.
+In the initializations for the ROM pointers, I added a line of code that stored my arbitrary value (0x00) that added a byte in ROM. This addition into the ROM was placed immediately following the end of the key. Using this detail, I was ultimately able to calculate the length of the key and determine when to reset the key pointer index.
 ```
 terminate_address:
 	.byte	0x00		; arbitrarily chosen value
@@ -152,3 +152,8 @@ continueDecrypt:
 	jmp			decryptMessage
 	ret
 ```
+
+##### Result
+As expected, I obtained another easily-comprehendable message:
+![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/B_funct_message.PNG "B functionality result")
+Luckily, this message proved to contain hints for obtaining A functionality.

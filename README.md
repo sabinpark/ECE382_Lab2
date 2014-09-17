@@ -183,6 +183,7 @@ Luckily, this message proved to contain hints for obtaining A functionality.
 #### Brainstorming
 At first, I was completely clueless on how to solve this problem. In fact, I had intitally assumed that I was supposed to create a program that would take in an arbitrary encrypted message and somehow brute-force the program to try indefinite amounts of key combinations to somehow magically decrypt the message. After I reread the prompt, I realized that all I needed to do was find one specific key for this particular message. Again, not rocket science (but I suppose it's close enough). I compiled a list of what I knew and what I could potentially do to solve this problem:
 * the key is 16 bits (or 2 bytes) (given by the previously decrypted message)
+* the message only contains letters, periods, and spaces
 * frequency analysis is useful
 * based on the previous two messages, the last character of the message has a high chance of being *#*
 
@@ -201,6 +202,7 @@ With the assumption that the last character of the message will be equal to *#*,
 I decided to check spaces next. I found the hex value for the *space* char to be *20*. Using the frequency analysis table, I XOR'ed the space key with the most commonly occurring byte from each column (both even and odd). My guesses consisted of:
 * Even key: 16 xor 20 = 36
 * Odd key: 90 xor 20 = b0
+
 I ran the two keys in the program and got:
 
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/guess_2.PNG "guess 2")
@@ -211,6 +213,7 @@ Nope!
 Next on the table were 53 (even column) and ca (odd column)
 * Even key: 53 xor 20 = 73
 * Odd key: ca xor 20 = ea
+
 I ran the two keys in the program and got:
 
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/guess_3.PNG "guess 3")
@@ -221,6 +224,7 @@ Not quite, but getting better.
 From Guess 3, I found that the odd bytes were strange because they had numbers and symbols instead of letters. Thus, I kept my guess for the even bytes and changed my odd bytes guess to the next in the column.
 * Even key: 53 xor 20 = 73
 * Odd key: 9e xor 20 = be
+
 I ran the two keys in the program and got:
 
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/guess_4.PNG "guess 4")

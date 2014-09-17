@@ -54,7 +54,7 @@ at this point, the message is fully decrypted
 wait:
   jmp     wait
 ```
-
+***
 ## Lab
 
 ### Required Functionality
@@ -91,7 +91,7 @@ decrypt:
 forever:
 	jmp     forever
 ```
-
+***
 #### Subroutines
 ##### decryptMessage
 Translating my pseudo code into actual code was not very difficult. The only things I had to add in extra were the register for the message length and a jump call to continue to run through the message if it had not yet been fully decrypted.
@@ -114,7 +114,7 @@ decryptCharacter:
 	xor.b		@R5, R7
 	ret
 ```
-
+***
 ##### Result
 I changed the memory browser view to *character* in order to see the following message:
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/R_funct_message.PNG "R functionality result")
@@ -217,7 +217,7 @@ I ran the two keys in the program and got:
 SUCCESS!
 
 It turns out that my fourth guess worked!
-
+***
 ### Debugging
 #### Required Functionality
 I had some trouble initially due to the differences in bytes and words. I admit, I got lazy and simply set everything to .byte because I knew I was going to be reading through the message byte by byte. However, after I was confident that the logic of the code was correct, I went back and made sure that the code had .byte where it needed, and .word in its own appropriate places. Not rocket science.
@@ -225,7 +225,7 @@ I had some trouble initially due to the differences in bytes and words. I admit,
 I first attempted to create another subroutine that would calculate the length of the key...but I soon realized that was useless. Instead, I just made a small loop that would compare the terminate index and the current key index. When the two were equal, I would reset the key index back to the start.
 #### A Functionality
 My initial guess that the last char would be *#* turned out to be very wrong. Fortunately, I was able to disprove my assumption almost immediately. Once I started to get on a roll using the guess-check method, I found it easy to debug by simply taking out nonsensical message outputs. I would then move onto the next guess from the table.
-
+***
 ## Documentation
 * C2C Taylor Bodin gave me the idea to check for spaces, rather than checking for particular letters (A Functionality). 
 * I used http://www.asciitohex.com/ to convert from ASCII to hex (and vice versa). 

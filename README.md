@@ -60,7 +60,7 @@ wait:
 
 ### Required Functionality
 
-I started this lab by creating a new *.asm* file using a pre-made boilerplate file. I copied and pasted the pertinent subroutine sections from the provided skeleton file. Using my pseudo code, I first set the ROM with the encrypted message and the key.
+I started this lab by creating a new *.asm* file using a pre-made boilerplate file. I copied and pasted the pertinent subroutine sections from the provided skeleton file. Using my pseudo code, I first set the ROM with the encrypted message and the key. *NOTE:* the values stored in ROM below are from the required functionality test cases 
 
 ```
 encrypt_address:
@@ -70,3 +70,48 @@ key_address:
 ```
 
 As expected, the cipher text was stored in ROM starting at the address 0xC000. To my pleasant surprise, the next input into ROM (when I add in the key) was set immediately after the last byte of the cipher text. **[ADD USEFULNESS FOR COUNT]**
+
+As for the rest of the code, I simply initialized the pointers and then called the appropriate subroutines. The moving of pointers was pretty self-explanatory as well.
+
+```
+main:
+	mov.w   #__STACK_END,SP		; BOILERPLATE	Initialize stackpointer
+	mov.w   #WDTPW|WDTHOLD,&WDTCTL 	; BOILERPLATE	Stop watchdog timer
+
+; load registers with necessary info for decryptMessage here
+
+	mov.w	#encrypt_address, R4
+	mov.w	#key_address, R5
+	mov.w	#RAM, R6
+
+	call	#getLength
+
+decrypt:
+	call    #decryptMessage
+
+forever:
+	jmp     forever
+```
+
+#### Subroutines
+##### decryptMessage
+Translating my pseudo code into actual code was not very difficult. The only things I had to add in extra were the register for the message length and a jump call to continue to run through the message if it had not yet been fully decrypted.
+```
+decryptMessage:
+	tst		R8
+	jz		forever
+	mov.b		@R4+, R7	; put value at R4 into R7, increment R4
+	call		#decryptCharacter
+	mov.b		R7, 0(R6)	; put decrypted value into the address R6 points to
+	inc.w		R6
+	dec.b		R8
+	jmp		decryptMessage
+    	ret
+```
+##### decryptByte
+This second subroutine was ridiculously simple:
+```
+decryptCharacter:
+	xor.b		@R5, R7
+	ret
+```

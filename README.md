@@ -184,6 +184,7 @@ And so, I proceeded to first split the given cipher into two parts: even and odd
 
 ##### Guess 1:
 With the assumption that the last character of the message will be equal to *#*, I found the hex equivalent of *#* to be 23. I performed an XOR between 23 and the last byte of the message and obtained a potential *odd* key value of b3. I then performed an XOR between b3 and all of the odd bytes of the message. Unfortunately, I got nonsense results that did not seem remotely close to any message:
+
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/guess_1.PNG "guess 1")
 
 ##### Guess 2:
@@ -191,6 +192,7 @@ I decided to check spaces next. I found the hex value for the *space* char to be
 * Even key: 16 xor 20 = 36
 * Odd key: 90 xor 20 = b0
 I ran the two keys in the program and got:
+
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/guess_2.PNG "guess 2")
 
 Nope!
@@ -200,6 +202,7 @@ Next on the table were 53 (even column) and ca (odd column)
 * Even key: 53 xor 20 = 73
 * Odd key: ca xor 20 = ea
 I ran the two keys in the program and got:
+
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/guess_3.PNG "guess 3")
 
 Not quite, but getting better.
@@ -209,6 +212,7 @@ From Guess 3, I found that the odd bytes were strange because they had numbers a
 * Even key: 53 xor 20 = 73
 * Odd key: 9e xor 20 = be
 I ran the two keys in the program and got:
+
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/guess_4.PNG "guess 4")
 
 SUCCESS!

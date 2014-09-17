@@ -6,7 +6,7 @@ ECE382_Lab2
 | Item | Status | Date |
 |-------|-------|-------|
 | Required Functionality | Complete | 16 September 14 |
-| B Functionality | - | - |
+| B Functionality | Complete | 16 September 14 |
 | A Functionality | - | - |
 
 ## Prelab
@@ -115,3 +115,79 @@ decryptCharacter:
 	xor.b		@R5, R7
 	ret
 ```
+
+##### Result
+I changed the memory browser view to *character* in order to see the following message:
+![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/R_funct_message.PNG "R functionality result")
+
+As expected, the message was properly decrypted starting at the RAM memory address of 0x0200.
+
+### B Functionality
+Adding the B functionality was not too difficult. I accomplished this next task by adding two registers:
+* R10 = register to store and hold an arbitrary terminate address
+* R11 = register to store and hold the permanent value of the key_address
+In the initializations for the ROM pointers, I added a line of code that stored my arbitrary value (0x00) that added a byte in ROM. This addition into the ROM was placed immediately following the end of the key. Using this detail, I was ultimately able to calculate the length of the key and determine when to reset the key pointer index.
+```
+terminate_address:
+	.byte	0x00		; arbitrarily chosen value
+```
+As you may notice, I used R11 to reset the key index.
+```
+resetKeyIndex:
+	mov.w	R11, R5
+	jmp		continueDecrypt
+```
+Aside from those changes, I added in a *jz* call that would reset the key index if the index incremented to the address value of the terminating address. And thus, I also added in a label that would be used to return to the message decryption if/when I needed to reset the key index. 
+```
+decryptMessage:
+	tst			R8
+	jz			forever
+	cmp.w		#terminate_address, R5
+	jz			resetKeyIndex
+continueDecrypt:
+	mov.b		@R4+, R7	; put value at R4 into R7, increment R4
+	call		#decryptCharacter
+	mov.b		R7, 0(R6)	; put decrypted value into the address R6 points to
+	inc.w		R6
+	dec.b		R8
+	jmp			decryptMessage
+	ret
+```
+
+I used the B functionality test case to test the program:
+```
+encrypt_address:
+	.byte	0xf8,0xb7,0x46,0x8c,0xb2,0x46,0xdf,0xac,0x42,0xcb,0xba,0x03,0xc7,0xba,0x5a,0x8c,0xb3,0x46,0xc2,0xb8,0x57,0xc4,0xff,0x4a,0xdf,0xff,0x12,0x9a,0xff,0x41,0xc5,0xab,0x50,0x82,0xff,0x03,0xe5,0xab,0x03,0xc3,0xb1,0x4f,0xd5,0xff,0x40,0xc3,0xb1,0x57,0xcd,0xb6,0x4d,0xdf,0xff,0x4f,0xc9,0xab,0x57,0xc9,0xad,0x50,0x80,0xff,0x53,0xc9,0xad,0x4a,0xc3,0xbb,0x50,0x80,0xff,0x42,0xc2,0xbb,0x03,0xdf,0xaf,0x42,0xcf,0xba,0x50,0x8f
+key_address:
+	.byte	0xac,0xdf,0x23
+```
+*NOTE:* I had to separate the provided value of *0xacdf23* into *0xac,0xdf,0x23* in order for the program to properly take in the key.
+
+##### Result
+As expected, I obtained another easily-comprehendable message:
+![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/B_funct_message.PNG "B functionality result")
+
+Luckily, this message proved to contain hints for obtaining A functionality.
+
+### A Functionality
+#### Brainstorming
+At first, I was completely clueless on how to solve this problem. In fact, I had intitally assumed that I was supposed to create a program that would take in an arbitrary encrypted message and somehow brute-force the program to try indefinite amounts of key combinations to somehow magically decrypt the message. After I reread the prompt, I realized that all I needed to do was find one specific key for this particular message. Again, not rocket science (but I suppose it's close enough). I compiled a list of what I knew and what I could potentially do to solve this problem:
+* the key is 16 bits (or 2 bytes) (given by the previously decrypted message)
+* frequency analysis is useful
+
+I did a google search on frequency analysis and found an example of the infamous Eve deciphering a hidden message using frequency analysis. She basically counted the most frequent cipher and used educated guesses to XOR with the envrypted message. Using the guess and check method, she was eventually able to decipher the message.
+
+And so, I proceeded to first split the given cipher into two parts: even and odd. *NOTE:* I did this because we were given the fact that the key consisted of two bytes. I then counted the frequency of each byte and took note on a table:
+
+
+
+
+### Debugging
+#### Required Functionality
+I had some trouble initially due to the differences in bytes and words. I admit, I got lazy and simply set everything to .byte because I knew I was going to be reading through the message byte by byte. However, after I was confident that the logic of the code was correct, I went back and made sure that the code had .byte where it needed, and .word in its own appropriate places. Not rocket science.
+#### B Functionality
+I first attempted to create another subroutine that would calculate the length of the key...but I soon realized that was useless. Instead, I just made a small loop that would compare the terminate index and the current key index. When the two were equal, I would reset the key index back to the start.
+#### A Functionality
+
+## Documentation
+No help received.

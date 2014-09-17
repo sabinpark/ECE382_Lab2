@@ -6,7 +6,7 @@ ECE382_Lab2
 | Item | Status | Date |
 |-------|-------|-------|
 | Required Functionality | Complete | 16 September 14 |
-| B Functionality | - | - |
+| B Functionality | Complete | 16 September 14 |
 | A Functionality | - | - |
 
 ## Prelab
@@ -116,4 +116,9 @@ decryptCharacter:
 	ret
 ```
 
+##### Result
+![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/R_funct_message.PNG "R functionality result")
+
 ### B Functionality
+
+

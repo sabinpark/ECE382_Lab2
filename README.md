@@ -119,6 +119,7 @@ decryptCharacter:
 ##### Result
 I changed the memory browser view to *character* in order to see the following message:
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/R_funct_message.PNG "R functionality result")
+
 As expected, the message was properly decrypted starting at the RAM memory address of 0x0200.
 
 ### B Functionality
@@ -156,4 +157,5 @@ continueDecrypt:
 ##### Result
 As expected, I obtained another easily-comprehendable message:
 ![alt test](https://github.com/sabinpark/ECE382_Lab2/blob/master/images/B_funct_message.PNG "B functionality result")
+
 Luckily, this message proved to contain hints for obtaining A functionality.

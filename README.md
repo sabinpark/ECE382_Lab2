@@ -225,6 +225,7 @@ I had some trouble initially due to the differences in bytes and words. I admit,
 #### B Functionality
 I first attempted to create another subroutine that would calculate the length of the key...but I soon realized that was useless. Instead, I just made a small loop that would compare the terminate index and the current key index. When the two were equal, I would reset the key index back to the start.
 #### A Functionality
+My initial guess that the last char would be *#* turned out to be very wrong. Fortunately, I was able to disprove my assumption almost immediately. Once I started to get on a roll using the guess-check method, I found it easy to debug by simply taking out nonsensical message outputs. I would then move onto the next guess from the table.
 
 ## Documentation
-No help received.
+C2C Taylor Bodin gave me the idea to check for spaces, rather than checking for particular letters (A Functionality). No other help received.

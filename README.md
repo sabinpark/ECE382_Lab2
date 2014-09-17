@@ -9,6 +9,9 @@ ECE382_Lab2
 | B Functionality | Complete | 16 September 14 |
 | A Functionality | Complete | 17 September 14 |
 
+## Purpose
+Get familiar with using the MSP430 and assembly language. Create an XOR decryption program.
+
 ## Prelab
 
 #### Requirements
@@ -240,6 +243,15 @@ I had some trouble initially due to the differences in bytes and words. I admit,
 I first attempted to create another subroutine that would calculate the length of the key...but I soon realized that was useless. Instead, I just made a small loop that would compare the terminate index and the current key index. When the two were equal, I would reset the key index back to the start.
 #### A Functionality
 My initial guess that the last char would be *#* turned out to be very wrong. Fortunately, I was able to disprove my assumption almost immediately. Once I started to get on a roll using the guess-check method, I found it easy to debug by simply taking out nonsensical message outputs. I would then move onto the next guess from the table.
+***
+## Testing Methodology
+Testing my program was very simple. I initially set the values in my memory browser all to 0x00. Using the debugger, I ran through the program line by line at first in order to see that my program did everything I expected. I used a breakpoint right at the subroutine, *decryptMessage*, to help speed things up. To see whether my program worked or not, I simply had to run through the program and see the outputs in RAM. I did have to change the view of the memory browser to *character*. If the RAM contained a message that I could read, I concluded that the program worked. After each addition of functionality, I tried the previous functionality level test cases as well to ensure 100% functionality for all parts.
+***
+## Conclusion
+The decryption program was a success. Starting from the required functionality, I worked little by little to make my program do more stuff. The program successfully takes in an encrypted message of arbitrary length along with a key of arbitrary length. It appropriately XORs the two together and produces a decrypted message. In addition, I was able to use basic deduction skills and a bit of research to decrypt a message with a 2-byte unknown key. 
+
+This time, I made sure my pseudo code was pretty close to the actual code that would go in the program. Aside from a slight logic error (I accidentally wrote down a wrong register in the pseudo code), everything was organized in such a way that I had little trouble in programming my functional code. Overall, I feel as if I am getting much better at coding with assembly language.
+
 ***
 ## Documentation
 * C2C Taylor Bodin gave me the idea to check for spaces, rather than checking for particular letters (A Functionality). 
